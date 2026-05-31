@@ -31,15 +31,15 @@ CREATE TABLE EMPLEADO (
     cedula VARCHAR(10) NOT NULL UNIQUE,
     direccion VARCHAR(10)NOT NULL,
     telefono VARCHAR(10),
-    id_usuario INT NOT NULL,
-    id_horario INT NOT NULL,
-    id_cargo INT NOT NULL,
+     id_usuario VARCHAR(50) NOT NULL,   
+    id_horario VARCHAR(50) NOT NULL,   
+    id_cargo VARCHAR(50) NOT NULL,     
     
     PRIMARY KEY (id_empleado),
-
-    foreign key (id_usuario) references USUARIO(id_usuario),
-    foreign key (id_horario) references HORARIO(id_horario),
-    foreign key (id_cargo) references CARGO(id_cargo)
+    
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id_usuario),
+    FOREIGN KEY (id_horario) REFERENCES HORARIO(id_horario),
+    FOREIGN KEY (id_cargo) REFERENCES CARGO(id_cargo)
 );
 CREATE TABLE ASISTENCIA (
     id_asistencia VARCHAR (50) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE ASISTENCIA (
     entrada_vespertina TIME,
     salida_vespertina TIME,
     estado_asistencia ENUM('PRESENTE','ATRASADO','FALTA'),
-    id_empleado INT NOT NULL,
+    id_empleado VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (id_asistencia),
 
@@ -62,7 +62,7 @@ CREATE TABLE DESCUENTO (
     tipo ENUM('HORAS', 'DIA') NOT NULL,
     monto DOUBLE NOT NULL,
     fecha DATE NOT NULL,
-    id_asistencia INT NOT NULL,
+    id_asistencia VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (id_descuento),
 
@@ -75,7 +75,7 @@ CREATE TABLE JUSTIFICACION (
     motivo VARCHAR(200) NOT NULL,
     horas_justificadas INT NOT NULL,
     fecha_registro DATE NOT NULL,
-    id_asistencia INT NOT NULL UNIQUE,
+    id_asistencia VARCHAR(50) NOT NULL UNIQUE,
 
     PRIMARY KEY (id_justificacion),
 
@@ -86,7 +86,7 @@ CREATE TABLE HORASEXTRA (
     fecha DATE NOT NULL,
     hora_inicio_extra TIME NOT NULL,
     hora_fin_extra TIME NOT NULL,
-    id_asistencia INT NOT NULL,
+    id_asistencia INT VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (id_horaextra),
 
@@ -102,7 +102,7 @@ CREATE TABLE REPORTE (
     mes INT NOT NULL CHECK (mes BETWEEN 1 AND 12),
     año INT NOT NULL,
     fecha_generacion DATE NOT NULL,
-    id_empleado INT NOT NULL,
+    id_empleado VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (id_reporte),
 
